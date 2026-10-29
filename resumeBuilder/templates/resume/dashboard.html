@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — ResumeForge{% endblock %}
+
+{% block content %}
+<section class="page-shell">
+  <div class="container">
+    <div class="dash-head">
+      <div>
+        <h1>Your resumes</h1>
+        <p style="margin:0.35rem 0 0;color:var(--muted)">Hi {{ current_user.name.split()[0] }} — edit, preview, or download anytime.</p>
+      </div>
+      <a class="btn btn-accent" href="{{ url_for('resume.create') }}">+ New resume</a>
+    </div>
+
+    {% if resumes %}
+    <div class="resume-list">
+      {% for r in resumes %}
+      <article class="resume-item">
+        <div>
+          <h3>{{ r.title }}</h3>
+          <div class="meta">
+            {{ r.template|capitalize }} · {{ r.experience_type|capitalize }}
+            {% if r.updated_at %} · Updated {{ r.updated_at.strftime('%d %b %Y') }}{% endif %}
+          </div>
+        </div>
+        <div class="resume-actions">
+          <a class="btn btn-ghost btn-sm" href="{{ url_for('resume.edit_personal', resume_id=r.id) }}">Edit</a>
+          <a class="btn btn-ghost btn-sm" href="{{ url_for('resume.preview', resume_id=r.id) }}">Preview</a>
+          <a class="btn btn-primary btn-sm" href="{{ url_for('resume.download_pdf', resume_id=r.id) }}">PDF</a>
+          <form method="post" action="{{ url_for('resume.delete', resume_id=r.id) }}" onsubmit="return confirm('Delete this resume?');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <h2>No resumes yet</h2>
+      <p style="color:var(--muted)">Create your first resume and choose a template.</p>
+      <a class="btn btn-accent" href="{{ url_for('resume.create') }}">Create resume</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

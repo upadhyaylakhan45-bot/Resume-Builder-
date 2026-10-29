@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ section }} — {{ resume.title }}{% endblock %}
+
+{% block content %}
+<section class="page-shell">
+  <div class="container builder-layout">
+    {% include "resume/_steps.html" %}
+    <div class="panel">
+      <h1>{{ section }}</h1>
+      <p class="sub">
+        Editing <strong>{{ resume.title }}</strong>
+        {% if experience_type %} · Profile: {{ experience_type }}{% endif %}
+      </p>
+      <form method="post">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.type not in ['CSRFToken', 'SubmitField'] %}
+        <div class="form-group">
+          {{ field.label }}
+          {% if field.type == 'TextAreaField' %}
+            {{ field(class_="form-control", rows=6) }}
+          {% else %}
+            {{ field(class_="form-control") }}
+          {% endif %}
+          {% if field.description %}
+            <span class="hint">{{ field.description }}</span>
+          {% endif %}
+          {% for e in field.errors %}<div class="errors">{{ e }}</div>{% endfor %}
+        </div>
+        {% endfor %}
+        <div class="form-actions">
+          {% for field in form if field.type == 'SubmitField' %}
+            {{ field(class_="btn btn-primary") }}
+          {% endfor %}
+          <a class="btn btn-ghost" href="{{ url_for('resume.preview', resume_id=resume.id) }}">Skip to preview</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

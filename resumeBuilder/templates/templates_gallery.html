@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Templates — ResumeForge{% endblock %}
+
+{% block content %}
+<section class="page-shell">
+  <div class="container">
+    <div class="section-head">
+      <h2>Resume templates</h2>
+      <p>Professional, modern, simple, fresher-focused, and executive layouts. Customize font and accent color while building.</p>
+    </div>
+    <div class="template-grid">
+      {% for t in templates %}
+      <article class="template-card">
+        <div class="template-preview-swatch {{ t.id }}">
+          <div class="swatch-lines">
+            <span style="width:55%"></span>
+            <span style="width:80%"></span>
+            <span style="width:70%"></span>
+            <span style="width:45%"></span>
+          </div>
+        </div>
+        <div class="template-card-body">
+          <h3>{{ t.name }}</h3>
+          <p>{{ t.desc }}</p>
+          <span class="tag">{{ t.type }}</span>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <div style="margin-top:2rem">
+      {% if current_user.is_authenticated %}
+        <a class="btn btn-accent" href="{{ url_for('resume.create') }}">Build with a template</a>
+      {% else %}
+        <a class="btn btn-accent" href="{{ url_for('auth.register') }}">Sign up to start</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

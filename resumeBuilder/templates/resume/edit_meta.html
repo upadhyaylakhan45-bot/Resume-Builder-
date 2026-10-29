@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Template & style — {{ resume.title }}{% endblock %}
+
+{% block content %}
+<section class="page-shell">
+  <div class="container builder-layout">
+    {% set step = 0 %}
+    {% include "resume/_steps.html" %}
+    <div class="panel">
+      <h1>Template &amp; style</h1>
+      <p class="sub">Switch designs anytime. Changes apply to preview and PDF.</p>
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+          {{ form.title.label }}
+          {{ form.title(class_="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.experience_type.label }}
+          {{ form.experience_type(class_="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.template.label }}
+          {{ form.template(class_="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.font_family.label }}
+          {{ form.font_family(class_="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.accent_color.label }}
+          <div class="color-row">
+            <input type="color" id="color_picker" value="{{ form.accent_color.data or '#0F4C5C' }}">
+            {{ form.accent_color(class_="form-control", id="accent_color") }}
+          </div>
+        </div>
+        <div class="form-actions">
+          {{ form.submit(class_="btn btn-primary", value="Save style") }}
+          <a class="btn btn-ghost" href="{{ url_for('resume.preview', resume_id=resume.id) }}">Preview</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const picker = document.getElementById('color_picker');
+  const field = document.getElementById('accent_color');
+  if (picker && field) {
+    picker.addEventListener('input', () => { field.value = picker.value; });
+    field.addEventListener('input', () => {
+      if (/^#[0-9A-Fa-f]{6}$/.test(field.value)) picker.value = field.value;
+    });
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}ResumeForge — Craft resumes that get noticed{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1 class="hero-brand">Resume<em>Forge</em></h1>
+      <p class="hero-lead">
+        Build polished fresher and experienced resumes in minutes — pick a template,
+        customize fonts &amp; colors, preview live, and download a clean PDF.
+      </p>
+      <div class="hero-cta">
+        {% if logged_in %}
+          <a class="btn btn-accent" href="{{ url_for('resume.create') }}">Create a resume</a>
+          <a class="btn btn-ghost" href="{{ url_for('resume.dashboard') }}">My dashboard</a>
+        {% else %}
+          <a class="btn btn-accent" href="{{ url_for('auth.register') }}">Start free</a>
+          <a class="btn btn-ghost" href="{{ url_for('main.templates_gallery') }}">Browse templates</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-sheet">
+        <div class="accent-line"></div>
+        <h3>Aanya Sharma</h3>
+        <div class="meta">Python Developer · Mumbai · aanya@email.com</div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar short"></div>
+        <div class="bar"></div>
+        <div class="bar short"></div>
+      </div>
+      <div class="hero-badge-float">PDF ready</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Everything you need in one flow</h2>
+      <p>From skills and projects to internships, achievements, and downloadable PDFs.</p>
+    </div>
+    <div class="feature-row">
+      <div class="feature">
+        <h3>Skills, projects &amp; certs</h3>
+        <p>Capture technical skills, project titles, descriptions, technologies, and certifications.</p>
+      </div>
+      <div class="feature">
+        <h3>Fresher or experienced</h3>
+        <p>Switch profile type and add internships, work history, achievements, and extracurriculars.</p>
+      </div>
+      <div class="feature">
+        <h3>Templates &amp; PDF</h3>
+        <p>Five designs with font and color controls, live preview, edit anytime, and PDF download.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

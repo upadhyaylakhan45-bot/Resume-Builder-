@@ -1,0 +1,12 @@
+{# Shared section snippets — included by each template with local class prefixes #}
+
+{% macro contact_line(resume) -%}
+  {%- set parts = [] -%}
+  {%- if resume.email %}{% set _ = parts.append(resume.email) %}{% endif -%}
+  {%- if resume.phone %}{% set _ = parts.append(resume.phone) %}{% endif -%}
+  {%- if resume.location %}{% set _ = parts.append(resume.location) %}{% endif -%}
+  {%- if resume.linkedin %}{% set _ = parts.append(resume.linkedin) %}{% endif -%}
+  {%- if resume.github %}{% set _ = parts.append(resume.github) %}{% endif -%}
+  {%- if resume.website %}{% set _ = parts.append(resume.website) %}{% endif -%}
+  {{ parts|join('  ·  ') }}
+{%- endmacro %}

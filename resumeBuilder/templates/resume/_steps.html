@@ -1,0 +1,10 @@
+<aside class="steps">
+  <h4>Build steps</h4>
+  <a href="{{ url_for('resume.edit_meta', resume_id=resume.id) }}" class="{{ 'active' if step == 0 else '' }}">0 · Template &amp; style</a>
+  <a href="{{ url_for('resume.edit_personal', resume_id=resume.id) }}" class="{{ 'active' if step == 1 else '' }}">1 · Personal</a>
+  <a href="{{ url_for('resume.edit_skills', resume_id=resume.id) }}" class="{{ 'active' if step == 2 else '' }}">2 · Skills</a>
+  <a href="{{ url_for('resume.edit_education', resume_id=resume.id) }}" class="{{ 'active' if step == 3 else '' }}">3 · Education</a>
+  <a href="{{ url_for('resume.edit_projects', resume_id=resume.id) }}" class="{{ 'active' if step == 4 else '' }}">4 · Projects</a>
+  <a href="{{ url_for('resume.edit_experience', resume_id=resume.id) }}" class="{{ 'active' if step == 5 else '' }}">5 · Experience</a>
+  <a href="{{ url_for('resume.preview', resume_id=resume.id) }}" class="{{ 'active' if step == 6 else '' }}">6 · Preview &amp; PDF</a>
+</aside>

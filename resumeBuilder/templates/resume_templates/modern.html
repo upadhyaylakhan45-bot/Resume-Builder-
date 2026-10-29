@@ -1,0 +1,84 @@
+{% set accent = resume.accent_color or '#14213D' %}
+{% set font = resume.font_family or 'Helvetica' %}
+<div class="resume-root" style="font-family: {{ font }}, sans-serif; color: #222; font-size: 11px; line-height: 1.4;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+    <tr>
+      <td width="32%" valign="top" style="background: {{ accent }}; color: #fff; padding: 24px 16px;">
+        <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">{{ resume.full_name or 'Your Name' }}</div>
+        <div style="font-size: 9.5px; opacity: 0.9; margin-bottom: 16px;">
+          {% if resume.email %}<div style="margin-bottom: 4px;">{{ resume.email }}</div>{% endif %}
+          {% if resume.phone %}<div style="margin-bottom: 4px;">{{ resume.phone }}</div>{% endif %}
+          {% if resume.location %}<div style="margin-bottom: 4px;">{{ resume.location }}</div>{% endif %}
+          {% if resume.linkedin %}<div style="margin-bottom: 4px;">{{ resume.linkedin }}</div>{% endif %}
+          {% if resume.github %}<div style="margin-bottom: 4px;">{{ resume.github }}</div>{% endif %}
+          {% if resume.website %}<div>{{ resume.website }}</div>{% endif %}
+        </div>
+
+        {% if skills %}
+        <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin: 14px 0 6px; border-bottom: 1px solid rgba(255,255,255,0.35); padding-bottom: 4px;">Skills</div>
+        {% for s in skills %}<div style="margin-bottom: 3px; font-size: 10px;">• {{ s }}</div>{% endfor %}
+        {% endif %}
+
+        {% if certifications %}
+        <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin: 14px 0 6px; border-bottom: 1px solid rgba(255,255,255,0.35); padding-bottom: 4px;">Certifications</div>
+        {% for c in certifications %}
+        <div style="margin-bottom: 6px; font-size: 10px;">{{ c.name }}{% if c.year %}<br><span style="opacity:0.8">{{ c.year }}</span>{% endif %}</div>
+        {% endfor %}
+        {% endif %}
+
+        {% if hobbies %}
+        <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin: 14px 0 6px; border-bottom: 1px solid rgba(255,255,255,0.35); padding-bottom: 4px;">Hobbies</div>
+        <div style="font-size: 10px;">{{ hobbies|join(', ') }}</div>
+        {% endif %}
+      </td>
+      <td width="68%" valign="top" style="padding: 24px 20px; background: #fff;">
+        {% if resume.summary %}
+        <div style="font-size: 12px; font-weight: bold; color: {{ accent }}; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Profile</div>
+        <div style="margin-bottom: 14px;">{{ resume.summary }}</div>
+        {% endif %}
+
+        {% if experience %}
+        <div style="font-size: 12px; font-weight: bold; color: {{ accent }}; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Experience</div>
+        {% for e in experience %}
+        <div style="margin-bottom: 10px;">
+          <div style="font-weight: bold;">{{ e.role }}</div>
+          <div style="color: #666; font-size: 10px;">{{ e.company }}{% if e.duration %} · {{ e.duration }}{% endif %}</div>
+          {% if e.description %}<div style="margin-top: 2px;">{{ e.description }}</div>{% endif %}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if projects %}
+        <div style="font-size: 12px; font-weight: bold; color: {{ accent }}; text-transform: uppercase; letter-spacing: 1px; margin: 8px 0 6px;">Projects</div>
+        {% for p in projects %}
+        <div style="margin-bottom: 8px;">
+          <div style="font-weight: bold;">{{ p.title }}</div>
+          {% if p.description %}<div>{{ p.description }}</div>{% endif %}
+          {% if p.technologies %}<div style="color:#666;font-size:10px;">{{ p.technologies }}</div>{% endif %}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if education %}
+        <div style="font-size: 12px; font-weight: bold; color: {{ accent }}; text-transform: uppercase; letter-spacing: 1px; margin: 8px 0 6px;">Education</div>
+        {% for ed in education %}
+        <div style="margin-bottom: 6px;">
+          <div style="font-weight: bold;">{{ ed.degree }}</div>
+          <div style="color:#666;font-size:10px;">{{ ed.institute }}{% if ed.year %} · {{ ed.year }}{% endif %}{% if ed.score %} · {{ ed.score }}{% endif %}</div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if achievements %}
+        <div style="font-size: 12px; font-weight: bold; color: {{ accent }}; text-transform: uppercase; letter-spacing: 1px; margin: 8px 0 4px;">Achievements</div>
+        {% for a in achievements %}<div>• {{ a }}</div>{% endfor %}
+        {% endif %}
+
+        {% if extracurricular %}
+        <div style="font-size: 12px; font-weight: bold; color: {{ accent }}; text-transform: uppercase; letter-spacing: 1px; margin: 10px 0 4px;">Extracurricular</div>
+        {% for x in extracurricular %}<div>• {{ x }}</div>{% endfor %}
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+</div>
